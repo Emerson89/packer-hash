@@ -1,4 +1,4 @@
-# AMI Provisioning with Wordpress - AWS
+# AMI provisioning using wordpress packer - AWS
 
 ![Badge](https://img.shields.io/badge/packer-1.5.1-green)
 ![Badge](https://img.shields.io/badge/ansible-2.9.6-green)
