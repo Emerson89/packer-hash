@@ -1,6 +1,6 @@
 {
   "variables": {
-   "profile" : "delta",
+   "profile" : "customprofile",
    "region" : "us-east-1",
    "source_ami" : "ami-02e98f78",
    "instance_type" : "t2.micro", 
