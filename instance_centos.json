@@ -1,0 +1,30 @@
+{
+  "variables": {
+   "profile" : "delta",
+   "region" : "us-east-1",
+   "source_ami" : "ami-02e98f78",
+   "instance_type" : "t2.micro", 
+   "ssh_username" : "centos"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "profile": "{{user `profile`}}",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "name": "centos/images/*CentOS Linux 7 x86_64 HVM EBS 1708-*",
+      "instance_type": "{{user `instance_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ami_name": "packer-wordpress {{timestamp}}"
+    }
+  ],
+
+  "provisioners": [
+    { 
+      "type": "shell",
+      "script": "wordpress.sh"
+    }
+  ] 
+}
+
+
