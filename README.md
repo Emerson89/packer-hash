@@ -5,11 +5,24 @@
 
 ## Dependencies
 ![Badge](https://img.shields.io/badge/CentOS-7-red)
-![Badge](https://img.shields.io/badge/AccessKey-SecretKey-red)
+
+## Objetive
+
+Provide ami aws with zabbix-server installed
 
 ## Configuration 
 
-Set your variables as well as the profile used to access AWS
+Set your variables as well as the profile used to access AWS and region
+```
+{
+  "variables": {
+   "profile" : "customprofile",
+   "region" : "region",
+   "source_ami" : "ami-02e98f78",
+   "instance_type" : "t3.micro", 
+   "ssh_username" : "centos"
+  },
+```
 
 ## Comands
 ```
