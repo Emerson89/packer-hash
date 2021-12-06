@@ -8,7 +8,7 @@ Used to access AWS
 
 ## Objetive
 
-Provide ami aws with zabbix-server installed
+Provide ami aws with wordpress installed
 
 ## Configuration 
 

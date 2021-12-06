@@ -1,7 +1,7 @@
 {
   "variables": {
-   "profile" : "customprofile",
-   "region" : "region",
+   "profile" : "CUSTOM_PROFILE",
+   "region" : "REGION",
    "source_ami" : "ami-02e98f78",
    "instance_type" : "t3.micro", 
    "ssh_username" : "centos"
@@ -15,7 +15,7 @@
       "name": "centos/images/*CentOS Linux 7 x86_64 HVM EBS 1708-*",
       "instance_type": "{{user `instance_type`}}",
       "ssh_username": "{{user `ssh_username`}}",
-      "ami_name": "packer-zbx-server {{timestamp}}"
+      "ami_name": "packer-wordpress {{timestamp}}"
     }
   ],
 
