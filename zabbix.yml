@@ -1,9 +1,0 @@
----
-- name: Install Zabbix Server
-  hosts: all
-  vars:
-   pass_zabbix: zabbix2020
-   zbx_database_password: ZabbixDB#2020!
-  become: yes
-  roles:
-  - zabbix-server

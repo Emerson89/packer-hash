@@ -1,0 +1,7 @@
+- name: Install Server
+  include_tasks: server.yml
+- name: Install Mysql
+  include_tasks: mysql.yml
+- name: Install wordpress
+  include_tasks: wordpress.yml
+  

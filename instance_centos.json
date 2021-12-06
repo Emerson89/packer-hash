@@ -22,7 +22,7 @@
   "provisioners": [
     { 
       "type": "ansible",
-      "playbook_file": "./zabbix.yml"
+      "playbook_file": "./playbook.yml"
     }
   ] 
 }

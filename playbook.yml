@@ -1,0 +1,8 @@
+- name: Applying installation and dependency 
+  hosts: all 
+  become: yes 
+   
+  roles:
+     - server
+
+
