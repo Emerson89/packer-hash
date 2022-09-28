@@ -1,0 +1,63 @@
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  ignore_errors: true
+    
+- name: Install packages
+  yum:
+    name:
+        - nginx
+        - mysql-server
+        - wget
+        - openssl
+        - python3
+        - python3-pip
+    state: present
+
+- name: Update pip packages
+  pip:
+    name:
+        - setuptools
+        - pip
+    state: latest
+
+- name: Install pip packages
+  pip:
+    name:
+        - pymysql
+
+- name: Installing php7
+  yum:
+    name:
+        - php
+        - php-fpm
+        - php-common 
+        - php-opcache 
+        - php-mcrypt 
+        - php-cli 
+        - php-gd 
+        - php-curl 
+        - php-mysqlnd
+    state: present
+
+- name: Make sure mysql service is running
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- name: Make sure php-fpm service is running
+  systemd:
+    name: php-fpm
+    state: started
+    enabled: yes
+
+- name: Template archive default.conf
+  template:
+     src: default.conf.j2
+     dest: /etc/nginx/conf.d/default.conf
+
+- name: Make sure nginx service is running
+  systemd:
+    name: nginx
+    state: restarted

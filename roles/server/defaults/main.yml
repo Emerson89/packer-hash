@@ -3,4 +3,4 @@
 wp_mysql_db: MyWP
 wp_mysql_user: wpUser
 wp_mysql_password: worddb
-zabbix_database_creation: true
+database_creation: true
