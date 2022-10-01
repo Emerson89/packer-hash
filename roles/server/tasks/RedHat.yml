@@ -2,7 +2,10 @@
   selinux:
     state: disabled
   ignore_errors: true
-    
+
+- name: yum clean all 
+  shell: yum clean all
+
 - name: Install packages
   yum:
     name:

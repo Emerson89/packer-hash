@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 vms = {
-'rocky-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '12', 'box' => 'rockylinux/8'},
+'rocky-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '11', 'box' => 'rockylinux/8'},
 #'centos-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '12', 'box' => 'centos/7'},
 #'almalinux-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '12', 'box' => 'almalinux/8'},
 #'debian-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '13', 'box' => 'debian/bullseye64'},
@@ -14,7 +14,7 @@ Vagrant.configure('2') do |config|
      config.vm.define "#{name}" do |my|
        my.vm.box = conf['box']
        my.vm.hostname = "#{name}.example.com"
-       my.vm.network 'private_network', ip: "192.168.33.#{conf['ip']}"
+       my.vm.network 'private_network', ip: "172.16.0.#{conf['ip']}"
        my.vm.provision "ansible" do |ansible|
           ansible.playbook = "playbook.yml"
        end
