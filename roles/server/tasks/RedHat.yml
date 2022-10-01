@@ -2,7 +2,18 @@
   selinux:
     state: disabled
   ignore_errors: true
-    
+
+- name: Install nginx Repo.
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    enabled: "{{ item.enabled }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ nginx_repo_yum }}"
+
 - name: Install packages
   yum:
     name:
