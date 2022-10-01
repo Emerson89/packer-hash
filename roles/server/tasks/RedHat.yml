@@ -2,10 +2,7 @@
   selinux:
     state: disabled
   ignore_errors: true
-
-- name: yum clean all 
-  shell: yum clean all
-
+    
 - name: Install packages
   yum:
     name:
@@ -34,12 +31,9 @@
     name:
         - php
         - php-fpm
-        - php-common 
-        - php-opcache 
-        - php-mcrypt 
-        - php-cli 
         - php-gd 
-        - php-curl 
+        - php-pdo
+        - php-mbstring
         - php-mysqlnd
     state: present
 
