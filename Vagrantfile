@@ -2,12 +2,14 @@
 # vi: set ft=ruby :
 
 vms = {
-'rocky-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '11', 'box' => 'rockylinux/8'},
+#'rocky-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '11', 'box' => 'rockylinux/8'},
 #'centos-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '12', 'box' => 'centos/7'},
 #'almalinux-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '12', 'box' => 'almalinux/8'},
 #'debian-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '13', 'box' => 'debian/bullseye64'},
-#'ubuntu-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '14', 'box' => 'ubuntu/focal64'},
+'ubuntu-srv' => {'memory' => '1024', 'cpus' => '1', 'ip' => '14', 'box' => 'ubuntu/jammy64'},
 }
+
+Vagrant.require_version '>= 2.0.0'
 
 Vagrant.configure('2') do |config|
   vms.each do |name, conf|

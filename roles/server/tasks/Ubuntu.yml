@@ -1,21 +1,10 @@
-- name: Disable SELinux
-  selinux:
-    state: disabled
-  ignore_errors: true
-
-- name: Install nginx Repo.
-  yum_repository:
-    name: "{{ item.name }}"
-    description: "{{ item.description }}"
-    baseurl: "{{ item.baseurl }}"
-    enabled: "{{ item.enabled }}"
-    gpgcheck: "{{ item.gpgcheck }}"
-    gpgkey: "{{ item.gpgkey }}"
-    state: "{{ item.state | default('present') }}"
-  with_items: "{{ nginx_repo_yum }}"
+- name: Only run update
+  apt:
+    update_cache: yes
+    upgrade: yes
 
 - name: Install packages
-  yum:
+  apt:
     name:
         - nginx
         - mysql-server
@@ -26,12 +15,10 @@
         - python3-pip
     state: present
 
-- name: Update pip packages
-  pip:
-    name:
-        - setuptools
-        - pip
-    state: latest
+- name: Remove "foo" package
+  apt:
+    name: apache2
+    state: absent
 
 - name: Install pip packages
   pip:
@@ -39,28 +26,32 @@
         - pymysql
 
 - name: Installing php
-  yum:
+  apt:
     name:
         - php
         - php-fpm
+        - php-common
         - php-gd 
         - php-pdo
         - php-mbstring
         - php-mysqlnd
         - php-bcmath
-        - php-pecl-zip
-        - php-json   
+        - php-json
+        - php-soap
+        - php-zip
+        - php-xml
+        - php-xmlrpc   
     state: present
 
 - name: Make sure mysql service is running
   systemd:
-    name: mysqld
+    name: mysql
     state: started
     enabled: yes
 
 - name: Make sure php-fpm service is running
   systemd:
-    name: php-fpm
+    name: php8.1-fpm
     state: started
     enabled: yes
 
@@ -68,11 +59,6 @@
   template:
      src: wordpress.conf.j2
      dest: /etc/nginx/conf.d/wordpress.conf
-
-- name: Template archive nginx.conf
-  template:
-     src: nginx.conf.j2
-     dest: /etc/nginx/nginx.conf
 
 - name: Make sure nginx service is running
   systemd:

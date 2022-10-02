@@ -11,3 +11,9 @@
     name: php-fpm
     state: restarted
     enabled: yes
+
+- name: restart php8
+  service:
+    name: php8.1-fpm
+    state: restarted
+    enabled: yes

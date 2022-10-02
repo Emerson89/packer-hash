@@ -10,6 +10,9 @@ Used to access AWS
 
 Provide ami aws with wordpress installed
 
+ansible localhost -m setup | grep ansible_distribution_major_version
+fuser -k  80/tcp
+
 ## Configuration 
 
 Set your variables as well as the profile used to access AWS and region

@@ -1,11 +1,22 @@
 --- 
-- name: Add repository nginx
+#- name: Add repository nginx
+#  yum_repository:
+#    name: nginx
+#    description: nginx repo
+#    baseurl: http://nginx.org/packages/centos/$releasever/$basearch/
+#    gpgcheck: no
+#    enabled: yes
+#
+- name: Install nginx Repo.
   yum_repository:
-    name: nginx
-    description: nginx repo
-    baseurl: http://nginx.org/packages/centos/$releasever/$basearch/
-    gpgcheck: no
-    enabled: yes
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    enabled: "{{ item.enabled }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ nginx_repo_yum }}"
 
 - name: Enabling repository nginx
   shell: yum-config-manager --enable nginx-mainline
@@ -20,6 +31,7 @@
   yum: name={{ item }} state=latest
   with_items:
     - nginx
+    - vim
     - mariadb-server
     - mariadb
     - MySQL-python 
@@ -32,7 +44,7 @@
 
 - name: Template archive default.conf
   template:
-     src: default.conf.j2
+     src: wordpress.conf.j2
      dest: /etc/nginx/conf.d/default.conf
 
 - name: Start nginx and enable on boot
@@ -66,9 +78,3 @@
     - php-gd 
     - php-curl 
     - php-mysqlnd
-
-- name : Replacing user www.conf
-  shell: |
-    sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
-    sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
-  notify: restart php
