@@ -17,3 +17,8 @@
     name: php8.1-fpm
     state: restarted
     enabled: yes
+
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted

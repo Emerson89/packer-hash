@@ -6,4 +6,10 @@ mysql_users:
   - name: "{{ wp_mysql_user }}"
     password:  "{{ wp_mysql_password }}"
     priv: "{{ wp_mysql_db }}.*:ALL"
-
+mysql_root_users:
+  - login_user: root
+    login_password: ""
+    name: "{{ mysql_root_username }}"
+    password: "{{ mysql_root_pass }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "*.*:ALL,GRANT"

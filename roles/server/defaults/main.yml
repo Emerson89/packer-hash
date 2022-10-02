@@ -4,6 +4,8 @@ wp_mysql_db: MyWP
 wp_mysql_user: wpUser
 wp_mysql_password: worddb
 database_creation: true
+mysql_root_pass: Root@123
+mysql_root_username: root
 
 nginx_repo: nginx
 nginx_repo_yum:

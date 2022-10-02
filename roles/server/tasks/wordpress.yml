@@ -28,10 +28,10 @@
   when: 
    - ansible_distribution == "RedHat"
 
-- name : Replacing user www.conf
-  shell: |
-    sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
-    sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
-  notify: restart php8
-  when:
-   - ansible_distribution == "Ubuntu"
+#- name : Replacing user www.conf
+#  shell: |
+#    sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
+#    sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
+#  notify: restart php8
+#  when:
+#   - ansible_distribution == "Ubuntu"

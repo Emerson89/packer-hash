@@ -16,7 +16,8 @@ Vagrant.configure('2') do |config|
      config.vm.define "#{name}" do |my|
        my.vm.box = conf['box']
        my.vm.hostname = "#{name}.example.com"
-       my.vm.network 'private_network', ip: "172.16.0.#{conf['ip']}"
+       my.vm.network 'private_network', ip: "192.168.33.#{conf['ip']}"
+       #my.vm.network 'private_network', ip: "172.16.0.#{conf['ip']}"
        my.vm.provision "ansible" do |ansible|
           ansible.playbook = "playbook.yml"
        end
