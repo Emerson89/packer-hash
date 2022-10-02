@@ -12,7 +12,7 @@
     encrypted: "{{ item.encrypted | default('no') }}"
   with_items: "{{ mysql_users }}"
   when: database_creation
-  #no_log: true
+  no_log: true
 
 - name: Create a new database
   mysql_db:
@@ -25,4 +25,4 @@
     login_password: "{{ item.login_password | default('')}}"
   with_items: "{{ mysql_databases }}"
   when: database_creation
-  #no_log: true
+  no_log: true
