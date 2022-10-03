@@ -1,12 +1,4 @@
 --- 
-#- name: Add repository nginx
-#  yum_repository:
-#    name: nginx
-#    description: nginx repo
-#    baseurl: http://nginx.org/packages/centos/$releasever/$basearch/
-#    gpgcheck: no
-#    enabled: yes
-#
 - name: Install nginx Repo.
   yum_repository:
     name: "{{ item.name }}"
@@ -78,3 +70,9 @@
     - php-gd 
     - php-curl 
     - php-mysqlnd
+
+- name: Start php and enable on boot
+  service:
+    name: php-fpm
+    state: started
+    enabled: yes
