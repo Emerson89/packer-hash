@@ -1,0 +1,91 @@
+# Default output file for Terraform plan
+variables:
+  PACKER_OUTPUT: image.log
+
+stages:
+  - validate
+  - dev
+  - prod
+
+validate:
+  stage: validate
+  script:
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - echo $AWS_DEFAULT_REGION
+    - echo $SSH_USERNAME
+    - echo $CI_JOB_ID
+    - export
+    - terraform --version
+    - packer --version
+    - ansible --version
+    - echo "-------------- Validating Packer Code --------------"
+    - packer validate ami_aws.pkr.hcl
+    - echo "------------------------- Terraform validate Init -----------------------"
+    - terraform init
+    - terraform validate
+
+dev_image:
+  stage: dev
+  environment:
+    name: dev
+  only:
+    - /^develop$/
+  script:
+    - echo $AWS_DEFAULT_REGION
+    - ansible --version
+    - packer build ami_aws.pkr.hcl | tee -a $PACKER_OUTPUT
+  artifacts:
+    paths:
+      - $PACKER_OUTPUT
+
+dev_plan:
+  stage: dev
+  environment:
+    name: dev
+  only:
+    - /^develop$/
+  script:
+    - echo "Building..... terraform plan"
+    - terraform init
+    - terraform plan
+
+prd_image:
+  stage: prod
+  environment:
+    name: prd
+  only:
+    - /^main$/
+  script:
+    - pwd
+    - ansible --version
+    - packer build ami_aws.pkr.hcl
+  when: manual
+
+apply dev:
+  stage: dev
+  environment:
+    name: dev
+  script:
+    - terraform init
+    - terraform apply -auto-approve
+    - terraform destroy -auto-approve
+  dependencies:
+    - dev_plan
+  only:
+   - /^develop$/
+
+##Prod
+
+apply prd:
+  stage: prod
+  environment:
+    name: prd
+  only:
+    - /^main$/
+  script:
+    - echo ".....in Production"
+    - terraform init
+    - terraform plan
+    - terraform apply -auto-approve
+  when: manual
