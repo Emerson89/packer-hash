@@ -77,7 +77,12 @@ For local terraform test can be used the localstack
 
 ## Packer
 
-To test local the packer must add the credentials AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_SOURCE_AMI, SSH_USERNAME(centos/rocky),AWS_DEFAULT_REGION as environment variable
+To test local the packer must add the credentials as environment variable
+- AWS_ACCESS_KEY
+- AWS_SECRET_KEY 
+- AWS_SOURCE_AMI 
+- SSH_USERNAME(centos/rocky)
+- AWS_DEFAULT_REGION
 
 ```
 ## Checks the json template
