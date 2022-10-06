@@ -1,6 +1,7 @@
 # Default output file for Terraform plan
 variables:
   PACKER_OUTPUT: image.log
+  NAME_KEY: key.pem
 
 stages:
   - validate
@@ -69,7 +70,11 @@ apply dev:
   script:
     - terraform init
     - terraform apply -auto-approve
+    - terraform output -raw private_key_pem | tee -a $NAME_KEY
     - terraform destroy -auto-approve
+  artifacts:
+    paths:
+      - $NAME_KEY
   dependencies:
     - dev_plan
   only:
@@ -88,4 +93,8 @@ apply prd:
     - terraform init
     - terraform plan
     - terraform apply -auto-approve
+    - terraform output -raw private_key_pem | tee -a $NAME_KEY
+  artifacts:
+    paths:
+      - $NAME_KEY
   when: manual

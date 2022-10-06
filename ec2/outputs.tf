@@ -53,3 +53,8 @@ output "tags_all" {
   value       = try(aws_instance.main[0].tags_all, [0].tags_all, {})
 }
 
+output "private_key_pem" {
+  description = "The private IP address assigned to the instance."
+  value       = tls_private_key.key.private_key_pem
+  sensitive = true
+}

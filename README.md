@@ -42,6 +42,8 @@ Create environments *prd* and *dev* to segment environments across regions
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
 
+.pem key is saved in Job artifacts
+
 ## Ansible Wordpress 
 
 # Supports SOs
@@ -74,6 +76,8 @@ For local ansible test can be used vagrant
 ## Terraform
 
 For local terraform test can be used the localstack
+
+PEM key is saved in the current directory
 
 ## Packer
 
