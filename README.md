@@ -30,6 +30,7 @@ Variables gitlab-ci
 
 - AWS_ACCESS_KEY <-- used mask
 - AWS_SECRET_KEY <-- used mask
+- AWS_SOURCE_AMI
 - AWS_DEFAULT_REGION <-- create a default
 - SSH_USERNAME (centos/rocky)
 
